@@ -9,12 +9,12 @@ Prerequisites:
     - Npcap for Windows 10, see https://nmap.org/npcap/. **During install select winpcap compatible mode.**
     
 Build/usage instructions:
-2. Copy and rename pcap dll files, because the pcap dll files included in the Matlab installation do not work and causes a crash. 
+1. Copy and rename pcap dll files, because the pcap dll files included in the Matlab installation do not work and causes a crash. 
     - Copy C:\Windows\System32\Packet.dll as Packet64.dll in the map of this simulink model.
     - Copy C:\Windows\System32\wpcap.dll as wpcap64.dll in the map of this simulink model.
-3. Open Simulink model "run_bota_ethercat.slx".
+2. Open Simulink model "run_bota_ethercat.slx".
     - Note that some Pcap drivers require Matlab/Simulink to be run in administrator mode to access ethernet device. This can be by right-click Matlab icon, and select run in administrator mode.
-6. Run the models in Normal or Accelerator mode. External mode is not supported.
+3. Run the models in Normal or Accelerator mode. External mode is not supported.
     - First run is likely to fail, because DeviceID parameter must be correctly set.
     - After first run, open diagnostics viewer and note the DeviceID Nr. related to your Ethernet device.
     - Update DeviceID in the parameters of the SOEM_bota_master and run again.
