@@ -3,7 +3,6 @@
 The example SOEM_bota_master Block shows basic usage of the Simple Open EtherCAT Master (SOEM) library by transferring input and output PDO data with an EtherCAT Slave device. The example model is to be run in Normal or Accelerator mode on Windows. 
 
 Prerequisites:
-(- Supported version of Microsoft Visual Studio + Windows SDK installed)
 - Pcap driver installed
     - WinPcap for Windows 7/8/8.1, see https://www.winpcap.org
     - Npcap for Windows 10, see https://nmap.org/npcap/. **During install select winpcap compatible mode.**
