@@ -5,6 +5,7 @@
 This software provides Matlab interfaces for the ethercat and serial version of the Bota Systems AG force-torque sensors.
 
 **Authors(s):** Martin Wermelinger, Lefteris Kotsonis, Ilias Patsiaouras
+
 **Contact:** Bota Systems AG, sw-support@botasys.com
 
 #### rokubimini_matlab_rosbag_read.m ####
