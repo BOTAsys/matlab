@@ -1,6 +1,6 @@
 # Simple EtherCAT Master for Bota Devices #
 
-The example SOEM_bota_master Block uses the Simple Open EtherCAT Master (SOEM) library to transfer input and output PDO data and SDO with an EtherCAT Slave device. The model is to be run in Normal or Accelerator mode on Windows.
+The example SOEM_bota_master Block uses the Simple Open EtherCAT Master (SOEM) library to transfer input and output PDO data and SDO with an EtherCAT Slave device. The model is to be run in Normal or Accelerator mode on Windows or Linux.
 
 ### Prerequisites ###
 Pcap driver installed (Windows only):
