@@ -4,28 +4,47 @@ close all;
 clear all;
 clc
 
-runConfig=false;
+runConfig=true;
 runPlot=true;
 
 %% Set up the serial port object
 SerialPort='/dev/ttyUSB0'; %serial port
 BaudRate=460800; %460800;
-runtime=20.0; % [s]
+runtime=10.0; % [s]
 timeout=10;
 
-s = serialport(SerialPort,BaudRate,"Timeout",timeout);
-
 %% Config serial port
+s = serialport(SerialPort,BaudRate,"Timeout",timeout);
+pause(4.0);
 
 if (runConfig)
-    disp(['Configure sensor on port ',SerialPort,'. This may take a while (~35s).'])
+    disp(['Configure sensor on port ',SerialPort,'. This may take a while.'])
+    sincLength=512;
     offset=zeros(6,1);
-    configSerial(s,512,offset);
-    clear s
-    pause(35)
+%     count=0;
+%     while (count<5)
+%         [Status, Wrench, Timestamp, Temperature] = readSerialFrame(s);
+%         if (Status>=0)
+%             count=count+1;
+%             offset(1,1)=Wrench(1);
+%             offset(2,1)=Wrench(2);
+%             offset(3,1)=Wrench(3);
+%             offset(4,1)=Wrench(4);
+%             offset(5,1)=Wrench(5);
+%             offset(6,1)=Wrench(6);
+%         end
+%     end
+%     Wrench
+%     offset(1,1)=Wrench(1);
+%     offset(2,1)=Wrench(2);
+%     offset(3,1)=Wrench(3);
+%     offset(4,1)=Wrench(4);
+%     offset(5,1)=Wrench(5);
+%     offset(6,1)=Wrench(6);
+    configSerial(s,sincLength,offset);
     disp('Sensor is configured');
-    s = serialport(SerialPort,BaudRate,"Timeout",timeout);
 end
+
 
 %% Read sensor and plot data
 
@@ -78,11 +97,10 @@ end
 
 % Run the sensor in a loop
 tStart=now;
-tNow=now;
 count=0;
 flush(s)
+tNow=now;
 while tNow<tStart+runtime*1e-5
-%     disp(s.NumBytesAvailable)
     [Status, Wrench, Timestamp, Temperature] = readSerialFrame(s);
     
     if (Status>=0)
@@ -123,6 +141,6 @@ while tNow<tStart+runtime*1e-5
     end
 end
 disp(['Samples received: ',num2str(count)])
-flush(s)
+
 %% Clean up the serial port
 clear s;
