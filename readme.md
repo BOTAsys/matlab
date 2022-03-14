@@ -1,5 +1,12 @@
 ## This archive includes the following code snippets. ##
 
+---
+
+## NOTE: ##
+This repository has been moved to the [botasys gitlab group](https://gitlab.com/botasys/matlab_interface) and will be deprecated eventually.
+
+---
+
 ## Overview ##
 
 This software provides Matlab interfaces for the ethercat and serial version of the Bota Systems AG force-torque sensors.
