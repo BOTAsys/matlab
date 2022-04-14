@@ -4,10 +4,14 @@ close all;
 clear all;
 clc
 
-runOffsetCalibration=false;
+runOffsetCalibration=true;
+dacCalibration=true;
+adcOffset=true;
+adcGain=false;
+systemOffset=false;
 
 %% Set up the serial port object
-SerialPort='COM1'; %/dev/ttyUSB0; % serial port
+SerialPort='/dev/ttyUSB0'; %/dev/ttyUSB0; % serial port
 BaudRate=460800; %460800;
 timeout=10;
 runtime=5;
@@ -136,35 +140,43 @@ end
 %% Offset calibration
 if runOffsetCalibration
     flush(s,'input')
-    bytes = unicode2native('A');
-    write(s,bytes,"uint8");
-    while (s.NumBytesAvailable==0)
-%         disp('DAC calibration');
-        pause(0.1);
+    if dacCalibration
+        bytes = unicode2native('A');
+        write(s,bytes,"uint8");
+        while (s.NumBytesAvailable==0)
+    %         disp('DAC calibration');
+            pause(0.1);
+        end
     end
 
-    flush(s,'input')
-    bytes = unicode2native('o');
-    write(s,bytes,"uint8");
-    while (s.NumBytesAvailable==0)
-%         disp('ADC offset calibration');
-        pause(0.1);
+    if adcOffset
+        flush(s,'input')
+        bytes = unicode2native('o');
+        write(s,bytes,"uint8");
+        while (s.NumBytesAvailable==0)
+    %         disp('ADC offset calibration');
+            pause(0.1);
+        end
     end
 
-    flush(s,'input')
-    bytes = unicode2native('g');
-    write(s,bytes,"uint8");
-    while (s.NumBytesAvailable==0)
-%         disp('ADC gain calibration');
-        pause(0.1);
+    if adcGain
+        flush(s,'input')
+        bytes = unicode2native('g');
+        write(s,bytes,"uint8");
+        while (s.NumBytesAvailable==0)
+    %         disp('ADC gain calibration');
+            pause(0.1);
+        end
     end
 
-    flush(s,'input')
-    bytes = unicode2native('o');
-    write(s,bytes,"uint8");
-    while (s.NumBytesAvailable==0)
-%         disp('ADC offset calibration');
-        pause(0.1);
+    if systemOffset
+        flush(s,'input')
+        bytes = unicode2native('o');
+        write(s,bytes,"uint8");
+        while (s.NumBytesAvailable==0)
+    %         disp('ADC offset calibration');
+            pause(0.1);
+        end
     end
 
     % save configuration
@@ -180,7 +192,7 @@ if runOffsetCalibration
     bytes = unicode2native('#');
     write(s,bytes,"uint8");
     while (s.NumBytesAvailable==0)
-        disp('Reboot');
+%         disp('Reboot');
         pause(0.1);
     end
 
